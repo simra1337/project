@@ -1,0 +1,402 @@
+To generate token : 
+
+URL : http://localhost:8080/oauth/token
+Headers :
+	grant_type : password
+	username : {email}
+	client_id : live-test
+	client_secret : abcde
+	password : {password} 
+
+
+*Register API*
+
+Customer :
+
+1. Api to register a customer
+   METHOD : POST
+   url : http://localhost:8080/register-customer
+   example : 
+   {
+    "email" : "hashitest3@gmail.com",
+    "firstName" : "Mohd",
+    "middleName": "Simra",
+    "lastName" : "Khan",
+    "password" : "Shimmu123@",
+    "contact" : "7455990850",
+    "city" : "Najibabad",
+    "state" : "Uttar Pradesh",
+    "country" : "India",
+    "addressLine" : "Near Post Office",
+    "zipCode" : "246763",
+    "label" : "Test",
+    "confirmPassword" : "Shimmu123@"
+   }
+
+2. Api to activate the customer
+   METHOD : PUT
+   url : sent on email 
+   
+3. Api to re-send activation link
+   METHOD : POST
+   url : http://localhost:8080/resend-activation-mail/{email}
+   
+Seller : 
+
+1. Api to register a seller 
+   METHOD : POST
+   url : http://localhost:8080/register-seller
+   example :
+   {
+    "email" : "hashitest3@gmail.com",
+    "firstName" : "Sartaj",
+    "middleName" : "Ahmad",
+    "lastName" : "Khan",
+    "password" : "Shimmu123@",
+    "confirmPassword" : "Shimmu123@",
+    "city" : "Najibabad",
+    "state" : "Uttar Pradesh",
+    "country" : "India",
+    "addressLine" : "Near Post Office",
+    "zipCode" : "246763",
+    "label" : "Test",
+    "gst" : "123456575",
+    "companyContact" : "7455990850",
+    "companyName" : "Oil Limited"
+   } 
+   
+   
+   
+*LOGIN/LOGOUT API*
+
+Customer : 
+
+1. Api to login into the system 
+   METHOD : GET
+   url : http://localhost:8080/customer/home/{email}
+   Headers :
+   Authorization : bearer "generated token here"
+   
+2. Api to logout
+   METHOD : GET
+   url : http://localhost:8080/doLogout/
+   Headers : 
+            Authorization : Bearer "generated token here"
+   
+Seller : 
+
+1. Api to login into the system 
+   METHOD : GET
+   url : http://localhost:8080/seller/home/{email}
+   Headers :
+   Authorization : bearer "generated token here" 
+   //cannot login user is inactive
+   
+2. Api to logout
+   METHOD : GET
+   url : http://localhost:8080/doLogout/
+   Headers : 
+            Authorization : Bearer "generated token here"
+            
+
+
+Admin : 
+
+1. Api to login into the system 
+   METHOD : GET
+   url : http://localhost:8080/admin/home/
+   Headers :
+   Authorization : bearer "generated token here"
+   
+2. Api to logout
+   METHOD : GET
+   url : http://localhost:8080/doLogout/
+   Headers : 
+            Authorization : Bearer "generated token here"
+            
+
+
+*Forgot Password APIs*
+
+1. API to receive a token based url
+   METHOD : POST
+   url : http://localhost:8080/forgot-password/{email}
+   
+2. API to reset the password using the token 
+   METHOD : PUT
+   url : sent on mail
+   
+   
+   
+*ADMIN APIs*
+
+==============FEATURE 1======================
+
+1. API to list all registered customers
+
+   METHOD: GET
+   url : http://localhost:8080/admin/customers/
+   
+2. API to list all the registered sellers
+
+   METHOD : GET
+   url : http://localhost:8080/admin/sellers/
+   
+===============FEATURE 2=======================
+
+1. API to activate a customer
+   METHOD : PUT
+   url : http://localhost:8080/admin/customer/activate/{id}
+   
+2. API to de-activate a customer
+   METHOD : PUT
+   url : http://localhost:8080/admin/customer/deactivate/{id}
+   
+3. API to activate a seller
+   METHOD : PUT
+   url : http://localhost:8080/admin/seller/activate/{id}
+   
+4. API to de-activate a seller
+   METHOD : PUT
+   url : http://localhost:8080/admin/seller/deactivate/{id}
+   
+
+*Seller API*
+
+1. API to view my profile 
+   METHOD : GET 
+   url : http://localhost:8080/seller/profile/
+   
+2. API to update my profile
+   METHOD : PUT
+   url : http://localhost:8080/seller/update-profile/
+   
+3. API to update my password
+   METHOD : PUT
+   url : http://localhost:8080/seller/update-password/
+   
+4. API to update an address
+   METHOD : PUT
+   url : http://localhost:8080/seller/update-address/{id}
+   
+
+*Customer API*
+
+1. API to view my profile
+   METHOD : GET
+   url : http://localhost:8080/customer/profile/ 
+   
+2. API to view my addresses
+   METHOD : GET
+   url : http://localhost:8080/customer/address/
+   
+3. API to update my profile
+   METHOD : PUT
+   url : http://localhost:8080/customer/update-profile/
+   
+4. API to update my password
+   METHOD : PUT
+   url : http://localhost:8080/customer/update-password/
+  
+5. API to add a new address
+   METHOD : POST
+   url : http://localhost:8080/customer/add-address/
+   
+6. API to delete an address 
+   METHOD : DELETE
+   url: http://localhost:8080/customer/delete-address/{id}
+
+7. API to update an address
+   METHOD : PUT
+   url : http://localhost:8080/customer/update-address/{id}
+   
+ 
+
+
+*Category API*
+
+
+========================FEATURE 1==================================
+
+
+1. API to add category metadata field
+   METHOD : POST
+   url : http://localhost:8080/admin/add-category-metadata-field/?fieldName={name}
+   
+2. API to view all metadata fields
+   METHOD : GET
+   url : http://localhost:8080/admin/category-metadata-field/
+   
+3. API add a category
+   METHOD : POST
+   url : http://localhost:8080/admin/add-category/
+   
+4. API to view a category
+   METHOD : GET
+   url : http://localhost:8080/category/{id}
+   
+5. API to view all categories
+   METHOD : GET
+   url : http://localhost:8080/category/
+   
+6. API to update category 
+   METHOD : PUT
+   url : http://localhost:8080/admin/update-category/
+   Body :
+   "id" : {id}
+   "name" : {name}
+   
+7. API to add new category metadata field for a category
+   METHOD : POST
+   url : http://localhost:8080/admin/add-metadata-field-values/
+   example : 
+   {
+    "categoryMetadataFieldValuesDtoList" : [ {
+        "categoryId" : "14",
+        "metadataId": "9",
+        "values" : "M, L, XL, XXL"
+    },
+    {
+        "categoryId" : "14",
+        "metadataId" : "10",
+        "values" : "red, green, yellow"
+    }
+    ]
+   }
+   
+8. API to update values for an existing metadata field in a category
+   METHOD : PUT
+   url : http://localhost:8080/admin/update-metadata-field-values/
+   example : 
+   {
+    "categoryMetadataFieldValuesDtoList" : [ {
+    "categoryId" : "11",
+    "metadataId" : "9",
+    "values" : "S"
+    }
+    ]
+}
+   
+   
+=========================FEATURE 2=======================================
+
+1. API to list all categories
+   METHOD : GET
+   url : http://localhost:8080/seller/category/
+   
+   
+========================FEATURE 3=======================================
+
+1. API to list all categories
+   METHOD : GET
+   url : http://localhost:8080/customer/category/
+   	 		or
+   	 http://localhost:8080/customer/category/{id}
+   	 
+2. API to fetch filtering details for a category
+   METHOD : GET //todo
+   url : http://localhost:8080/customer/filter-category/{id}
+   
+   
+  
+*Product API*
+
+========================FEATURE 1====================================
+
+
+1. API add a product
+   METHOD : POST
+   url : http://localhost:8080/seller/add-product/
+   NOTE : Category ID passed should be of valid leaf node category"
+   example : 
+   {
+    "name" : "Iconic",
+    "brand" : "Amazon",
+    "categoryId" : "14"
+   }
+   
+2. API add a product variation
+   METHOD : POST
+   url : http://localhost:8080/seller/add-product-variation/
+   example : 
+   {
+    "productId" : "15",
+    "price" : "1600",
+    "quantity" : "10",
+    "primaryImageName": "Hero",
+    "metadata" : {
+        "size" : "M",
+        "colour" : "red"
+    }
+}
+
+3. API to view a Product 
+   METHOD : GET
+   url : http://localhost:8080/seller/product/{id}
+   
+4. API to view a Product Variation
+   METHOD : GET
+   url : http://localhost:8080/seller/product-variation/{id}
+   
+5. API to view all Products
+   METHOD : GET
+   url : http://localhost:8080/seller/product/
+   
+6. API to view all Product variations
+   METHOD : GET
+   url : http://localhost:8080/seller/product-variation/
+   
+7. API to delete a product
+   METHOD : DELETE
+   url : http://localhost:8080/seller/product/{id}
+   isDeleted will become 1
+   
+8. API to update a product
+   METHOD : PUT 
+   url : http://localhost:8080/seller/update-product/{id}
+   
+9. API to update a product variation
+   METHOD : PUT
+   url : http://localhost:8080/seller/update-product-variation/{id}
+   {
+    "price" : "20000",
+    "metadata" : {
+        "size" : "XXL",
+        "colour": "yellow"
+    }
+}
+   
+============================FEATURE 2================================
+
+1. API to view a product
+   METHOD : GET
+   url : http://localhost:8080/customer/product/{id}
+   
+2. API to view all products
+   METHOD : GET
+   url : http://localhost:8080/customer/all-products/{id}
+   
+3. API to view Similar products
+   METHOD : GET
+   url : http://localhost:8080/customer/similar-products/{id}
+   
+
+
+===========================FEATURE 3=====================================
+
+1. API to view a Product 
+   METHOD : GET
+   url : http://localhost:8080/admin/product/{id}
+   
+2. API to view all Product
+   METHOD : GET
+   url : http://localhost:8080/admin/product/
+   
+3. API to de-activate a product
+   METHOD : PUT
+   url : http://localhost:8080/deactivate-product/{id}
+   
+4. API to activate a product
+   METHOD : PUT 
+   url : http://localhost:8080/activate-product/{id}
+   
